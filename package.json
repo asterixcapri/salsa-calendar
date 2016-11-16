@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev": "./node_modules/.bin/webpack -d --watch",
-    "build": "NODE_ENV=production ./node_modules/.bin/webpack -p"
+    "build": "./node_modules/.bin/webpack -p"
   },
   "repository": {
     "type": "git",

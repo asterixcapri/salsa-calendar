@@ -1,14 +1,19 @@
+var process = require('process');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+var libraryName = 'SalsaCalendar';
+var outputFile = (process.argv.indexOf('-p') !== -1) ? libraryName + '.min' : libraryName;
 
 module.exports = {
     entry: [
         "./src/SalsaCalendar.js"
     ],
     output: {
-        path: __dirname,
-        filename: "build/salsa-calendar.js",
-        libraryTarget: "var",
-        library: "SalsaCalendar"
+        path: __dirname + '/build',
+        filename: outputFile + '.js',
+        library: "SalsaCalendar",
+        libraryTarget: "umd",
+        umdNamedDefine: true
     },
     module: {
         loaders: [
@@ -23,8 +28,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("build/salsa-calendar.css", {
-            //allChunks: true
-        })
+        new ExtractTextPlugin(outputFile + '.css')
     ]
 };
