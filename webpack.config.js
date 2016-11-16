@@ -2,8 +2,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: [
-        "./src/SalsaCalendar.js",
-        //"./src/css/salsa-calendar.less"
+        "./src/SalsaCalendar.js"
     ],
     output: {
         path: __dirname,
