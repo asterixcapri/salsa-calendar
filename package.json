@@ -2,7 +2,7 @@
   "name": "salsa-calendar",
   "version": "1.0.0",
   "description": "Simple Pure Javascript Calendar",
-  "main": "salsa-calendar.js",
+  "main": "build/salsa-calendar.js",
   "devDependencies": {
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -15,7 +15,6 @@
   },
   "scripts": {
     "dev": "./node_modules/.bin/webpack -d --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production ./node_modules/.bin/webpack -p"
   },
   "repository": {
