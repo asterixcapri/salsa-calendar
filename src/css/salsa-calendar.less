@@ -1,0 +1,237 @@
+.boxShadow(@shadow:0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow:@shadow;
+  -moz-box-shadow:@shadow;
+  box-shadow:@shadow;
+}
+
+.inlineBlock {
+  display:inline-block;
+  *display:inline;
+  *zoom:1;
+}
+
+.salsa-calendar {
+  .inlineBlock;
+  position:relative;
+  z-index:99999;
+  min-width:200px;
+  width:auto;
+  max-width:300px;
+  background-color:#fff;
+  color:#333;
+  padding:0;
+  border-width:1px;
+  border-style:solid;
+  border-color:#ccc;
+  border-color:rgba(0,0,0,.2);
+  .boxShadow(0 0 5px rgba(0,0,0,.2));
+  margin-top:5px;
+
+  &:before {
+    content:"";
+    display:block;
+    position:absolute;
+    background-image:url("img/pointer.png");
+    background-repeat:no-repeat;
+    background-position:-47px 0;
+    top:-16px;
+    left:10px;
+    width:25px;
+    height:16px;
+  }
+
+  &.sc-right,
+  &.sc-left {
+    top:0;
+    margin-top:-2px;
+
+    &:before {
+      top:0px;
+      width:16px;
+      height:25px;
+    }
+  }
+
+  &.sc-right {
+    margin-left:17px;
+
+    &:before {
+      left:-16px;
+      background-position:0 -47px;
+    }
+  }
+
+  &.sc-bottom {
+    &:before {}
+  }
+
+  &.sc-left {
+    margin-left:-17px;
+
+    &:before {
+      left:auto;
+      right:-16px;
+      background-position:100% -47px;
+    }
+  }
+
+  table {
+    width:100%;
+    padding:0;
+    border:0;
+    border-collapse:collapse;
+    margin:0;
+  }
+
+  th,
+  td {
+    width:30px;
+    height:30px;
+    font:12px/30px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-align:center;
+    padding:0;
+    border:0;
+    margin:0;
+
+    a {
+      color:#333;
+      text-decoration:none;
+
+      &:hover { text-decoration:none; }
+    }
+  }
+
+  thead {
+    th {
+      font-weight:bold;
+      text-align:center;
+      text-transform:uppercase;
+    }
+
+    .sc-nav {
+      position:relative;
+      height:30px;
+      border-bottom:1px solid #c7c8c8;
+    }
+
+    .sc-prev,
+    .sc-next {
+      position:absolute;
+      top:0;
+    }
+
+    .sc-prev { left:3px; }
+    .sc-next { right:3px; }
+
+    .sc-prev-year,
+    .sc-next-year,
+    .sc-prev-month,
+    .sc-next-month {
+      .inlineBlock;
+      width:22px;
+      height:22px;
+      overflow:hidden;
+      background-repeat:no-repeat;
+      background-position:center center;
+      margin-top:5px;
+
+      &:hover {
+        background-color:#eee;
+      }
+
+      span { display:none; }
+    }
+
+    .sc-prev-year,
+    .sc-prev-month { margin-right:0; }
+
+    .sc-next-year,
+    .sc-next-month { margin-left:0; }
+
+    .sc-prev-year { background-image:url("img/ico-prev-year.png"); }
+    .sc-next-year { background-image:url("img/ico-next-year.png"); }
+    .sc-prev-month { background-image:url("img/ico-prev-month.png"); }
+    .sc-next-month { background-image:url("img/ico-next-month.png"); }
+
+    .sc-week-day {
+      background:#eee;
+      font-weight:normal;
+      border-top:1px solid #fff;
+    }
+  }
+
+  tbody {
+    td {
+      width:30px;
+      height:1%;
+
+      &:empty {
+        height:30px;
+      }
+
+      border:1px solid #ececec;
+
+      &.sc-other-month {}
+
+      &.sc-day {
+        &:hover {
+          background:#eee;
+          cursor:pointer;
+        }
+      }
+
+      &.sc-today {}
+
+      &.sc-current {
+        background:#999;
+        color:#fff;
+        text-shadow:0 -1px 0 rgba(0,0,0,.25);
+        .boxShadow(inset 0 0 10px rgba(0,0,0,.4));
+
+        &:hover,
+        &:active {
+          background:#999;
+          color:#fff;
+        }
+      }
+
+      &.sc-disabled {
+        color:#ccc;
+
+        &:hover {
+          background:#fff;
+          cursor:default;
+        }
+      }
+    }
+  }
+
+  &.salsa-calendar-two-months {
+    position:relative;
+    min-width:400px;
+    width:auto;
+    max-width:600px;
+
+    &:after {
+      content:"";
+      position:absolute;
+      top:0;
+      right:50%;
+      z-index:999999;
+      width:1px;
+      height:100%;
+      background-color:#c7c8c8;
+      border-right:1px solid #c7c8c8;
+    }
+
+    table {
+      display:inline-table;
+      width:50%;
+    }
+  }
+}
+
+input.salsa-calendar-error {
+  color:#b00;
+  border-color:#b00;
+}
