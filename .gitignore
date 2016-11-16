@@ -1,4 +1,7 @@
 nbproject/*
 node_modules/*
+build/*.map
+build/SalsaCalendar.js
+build/SalsaCalendar.css
 
 !.gitignore
