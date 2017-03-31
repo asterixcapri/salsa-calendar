@@ -5,7 +5,7 @@
  *
  * Authors: Alessandro Astarita <aleast@caprionline.it>
  *          Mario Landolfo <mario@caprionline.it>
- *          
+ *
  */
 
 'use strict';
@@ -596,7 +596,7 @@ SalsaCalendar.prototype = {
             return true;
         }
 
-        var closed_dates = JSON.decode(range.closed_dates);
+        var closed_dates = range.closed_dates;
 
         var formatted_date = date.getFullYear() + "-" +
                              this._pad(date.getMonth() + 1) + "-" +
