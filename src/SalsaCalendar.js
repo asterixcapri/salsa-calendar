@@ -584,15 +584,7 @@ SalsaCalendar.prototype = {
 
     _check_closed_date: function(range, date)
     {
-        if (range.closed_dates === undefined) {
-            return true;
-        }
-
-        if (range.closed_dates === false) {
-            return true;
-        }
-
-        if (range.closed_dates === '') {
+        if ((range.closed_dates === undefined) || !range.closed_dates) {
             return true;
         }
 
