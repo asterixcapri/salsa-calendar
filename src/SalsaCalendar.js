@@ -63,6 +63,10 @@ function SalsaCalendar(options)
         options.showNextMonth = false;
     }
 
+    if (Compatibility.isTouchDevice()) {
+        options.showNextMonth = false;
+    }
+
     if (options.onSelect === undefined) {
         options.onSelect = function(input) {};
     }
