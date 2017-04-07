@@ -104,6 +104,13 @@ Compatibility.isVisible = function(elem)
     return elem.display !== "none";
 };
 
+Compatibility.isTouchDevice = function()
+{
+    return ('ontouchstart' in window)
+        || (navigator.MaxTouchPoints > 0)
+        || (navigator.msMaxTouchPoints > 0);
+};
+
 if (!Function.prototype.bind) {
     Function.prototype.bind = function(oThis) {
         if (typeof this !== "function") {
