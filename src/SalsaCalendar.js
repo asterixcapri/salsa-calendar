@@ -212,6 +212,12 @@ SalsaCalendar.prototype = {
             return;
         }
 
+        if (Compatibility.isTouchDevice()) {
+            if (document.body.className.search(" salsa-calendar-opened") === -1) {
+                document.body.className += " salsa-calendar-opened";
+            }
+        }
+
         if ((year === undefined) || (month === undefined)) {
             var date = this.input.checkDate();
 
@@ -291,6 +297,8 @@ SalsaCalendar.prototype = {
         if (this.calendar) {
             this.calendar.style.display = "none";
         }
+
+        document.body.className.replace(" salsa-calendar-opened", "");
     },
 
     hideOthers: function()
