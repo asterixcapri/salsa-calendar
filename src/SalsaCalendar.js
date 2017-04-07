@@ -298,7 +298,7 @@ SalsaCalendar.prototype = {
             this.calendar.style.display = "none";
         }
 
-        document.body.className.replace(" salsa-calendar-opened", "");
+        document.body.className = document.body.className.replace(" salsa-calendar-opened", "");
     },
 
     hideOthers: function()
