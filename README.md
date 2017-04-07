@@ -1,7 +1,5 @@
 # salsa-calendar
-Simple Pure Javascript Calendar
-
-salsa-calendar is a simple, standalone JavaScript library created to generate
+Salsa Calendar is a standalone pure JavaScript library created to generate
 date (range) pickers for hotel booking applications.
 
 
