@@ -127,12 +127,25 @@ SalsaCalendar.prototype = {
             return true;
         }
 
-        while (el.parentNode) {
-            if (el === this.calendar) {
+        var clone_el = el;
+
+        while (clone_el.parentNode) {
+            if (clone_el === this.calendar) {
                 return true;
             }
 
-            el = el.parentNode;
+            clone_el = clone_el.parentNode;
+        }
+
+        var clone_el = el;
+
+
+        while (clone_el.parentNode) {
+            if (clone_el.className.search("salsa-calendar") !== -1) {
+                return true;
+            }
+
+            clone_el = clone_el.parentNode;
         }
 
         return false;
@@ -212,10 +225,8 @@ SalsaCalendar.prototype = {
             return;
         }
 
-        if (Compatibility.isTouchDevice()) {
-            if (document.body.className.search(" salsa-calendar-opened") === -1) {
-                document.body.className += " salsa-calendar-opened";
-            }
+        if (document.body.className.search(" salsa-calendar-opened") === -1) {
+            document.body.className += " salsa-calendar-opened";
         }
 
         if ((year === undefined) || (month === undefined)) {
