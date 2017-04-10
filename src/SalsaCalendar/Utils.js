@@ -97,6 +97,10 @@ Utils.addEvent = function(elem, event, callback)
 
 Utils.isTouchDevice = function()
 {
+    if (/PhantomJS/.test(window.navigator.userAgent)) {
+        return false;
+    }
+
     return ('ontouchstart' in window)
         || (navigator.MaxTouchPoints > 0)
         || (navigator.msMaxTouchPoints > 0);
