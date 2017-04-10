@@ -12,39 +12,9 @@
 
 var Utils = {};
 
-Utils.findPosition = function(elem)
+Utils.getElementsByClassName = function(elem, class_name)
 {
-    var x = 0;
-    var y = 0;
-
-    while (elem) {
-        x += elem.offsetLeft;
-        y += elem.offsetTop;
-
-        elem = elem.offsetParent;
-    }
-
-    return {
-        left: x,
-        top: y
-    };
-};
-
-Utils.getEvent = function(event)
-{
-    return event || window.event;
-};
-
-Utils.getEventTarget = function(event)
-{
-    event = Utils.getEvent(event);
-
-    return event.target || window.event.srcElement;
-};
-
-Utils.getElementsByClassName = function(element, class_name)
-{
-    var elements = element.getElementsByTagName('*');
+    var elements = elem.getElementsByTagName('*');
     var tmp = [];
     var reg = "(^|\\s)" + class_name + "(\\s|$)";
 
@@ -62,13 +32,59 @@ Utils.getElementsByClassName = function(element, class_name)
     return tmp;
 };
 
-Utils.addEvent = function(element, event, callback)
+Utils.findElementPosition = function(elem)
 {
-    if (element.addEventListener) {
-        element.addEventListener(event, callback, false);
+    var x = 0;
+    var y = 0;
+
+    while (elem) {
+        x += elem.offsetLeft;
+        y += elem.offsetTop;
+
+        elem = elem.offsetParent;
     }
-    else if (element.attachEvent) {
-        element.attachEvent("on" + event, callback);
+
+    return {
+        left: x,
+        top: y
+    };
+};
+
+Utils.isElementVisible = function(elem)
+{
+    var w = elem.offsetWidth;
+    var h = elem.offsetHeight;
+
+    if (w === 0 && h === 0) {
+        return false;
+    }
+
+    if (w > 0 && h > 0) {
+        return true;
+    }
+
+    return elem.display !== "none";
+};
+
+Utils.getEvent = function(event)
+{
+    return event || window.event;
+};
+
+Utils.getEventTarget = function(event)
+{
+    event = Utils.getEvent(event);
+
+    return event.target || window.event.srcElement;
+};
+
+Utils.addEvent = function(elem, event, callback)
+{
+    if (elem.addEventListener) {
+        elem.addEventListener(event, callback, false);
+    }
+    else if (elem.attachEvent) {
+        elem.attachEvent("on" + event, callback);
     }
 };
 
@@ -86,22 +102,6 @@ Utils.getRandomString = function(count)
     }
 
     return text;
-};
-
-Utils.isVisible = function(elem)
-{
-    var w = elem.offsetWidth;
-    var h = elem.offsetHeight;
-
-    if (w === 0 && h === 0) {
-        return false;
-    }
-
-    if (w > 0 && h > 0) {
-        return true;
-    }
-
-    return elem.display !== "none";
 };
 
 Utils.isTouchDevice = function()

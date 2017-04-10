@@ -222,7 +222,7 @@ SalsaCalendar.prototype = {
 
     show: function(year, month)
     {
-        if (!Utils.isVisible(this.input.getElement())) {
+        if (!Utils.isElementVisible(this.input.getElement())) {
             return;
         }
 
@@ -275,7 +275,7 @@ SalsaCalendar.prototype = {
 
     _position_calendar_near: function(elem)
     {
-        var position = Utils.findPosition(elem);
+        var position = Utils.findElementPosition(elem);
 
         if (this.options.calendarPosition === "right") {
             this.calendar.style.top = parseInt(position.top) + "px";
