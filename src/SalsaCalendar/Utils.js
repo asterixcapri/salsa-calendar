@@ -32,6 +32,13 @@ Utils.getElementsByClassName = function(elem, class_name)
     return tmp;
 };
 
+Utils.elementHasClass = function(elem, class_name)
+{
+    var classes = elem.className.split(" ");
+
+    return classes.indexOf(class_name) !== -1;
+};
+
 Utils.findElementPosition = function(elem)
 {
     var x = 0;

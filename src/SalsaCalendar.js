@@ -133,7 +133,7 @@ SalsaCalendar.prototype = {
                 return true;
             }
 
-            if (el.className.search("salsa-calendar") !== -1) {
+            if (Utils.elementHasClass(el, "salsa-calendar-input")) {
                 return true;
             }
 
