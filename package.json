@@ -1,6 +1,6 @@
 {
   "name": "salsa-calendar",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Salsa Calendar is a standalone pure JavaScript library created to generate date (range) pickers for hotel booking applications.",
   "main": "build/SalsaCalendar.min.js",
   "devDependencies": {
