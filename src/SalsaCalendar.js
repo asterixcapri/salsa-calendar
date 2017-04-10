@@ -128,25 +128,16 @@ SalsaCalendar.prototype = {
             return true;
         }
 
-        var clone_el = el;
-
-        while (clone_el.parentNode) {
-            if (clone_el === this.calendar) {
+        while (el.parentNode) {
+            if (el === this.calendar) {
                 return true;
             }
 
-            clone_el = clone_el.parentNode;
-        }
-
-        var clone_el = el;
-
-
-        while (clone_el.parentNode) {
-            if (clone_el.className.search("salsa-calendar") !== -1) {
+            if (el.className.search("salsa-calendar") !== -1) {
                 return true;
             }
 
-            clone_el = clone_el.parentNode;
+            el = el.parentNode;
         }
 
         return false;
