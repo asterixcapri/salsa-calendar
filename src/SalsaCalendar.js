@@ -12,8 +12,9 @@
 
 var I18n = require('./SalsaCalendar/I18n.js');
 var Input = require('./SalsaCalendar/Input.js');
-var Compatibility = require('./SalsaCalendar/Compatibility.js');
+var Utils = require('./SalsaCalendar/Utils.js');
 
+require('./polyfill.js');
 require('./css/salsa-calendar.less');
 
 function SalsaCalendar(options)
@@ -63,7 +64,7 @@ function SalsaCalendar(options)
         options.showNextMonth = false;
     }
 
-    if (Compatibility.isTouchDevice()) {
+    if (Utils.isTouchDevice()) {
         options.showNextMonth = false;
     }
 
@@ -90,7 +91,7 @@ function SalsaCalendar(options)
     this.on_set_current_date_closures = [];
     this.on_date_click = function() {};
     this.i18n = new I18n(this, this.options.lang, options.dateFormats);
-    this.input = new Input(this, this.options.inputId, this.options.allowEmptyDate, this.options.inputReadOnly || Compatibility.isTouchDevice());
+    this.input = new Input(this, this.options.inputId, this.options.allowEmptyDate, this.options.inputReadOnly || Utils.isTouchDevice());
 
     this._init_events();
     this._init_options();
@@ -108,8 +109,8 @@ SalsaCalendar.prototype = {
 
     _init_events: function()
     {
-        Compatibility.addEvent(document, "click", function(event) {
-            var target = Compatibility.getEventTarget(event);
+        Utils.addEvent(document, "click", function(event) {
+            var target = Utils.getEventTarget(event);
 
             if (!this._is_calendar_element(target)) {
                 this.hide();
@@ -221,7 +222,7 @@ SalsaCalendar.prototype = {
 
     show: function(year, month)
     {
-        if (!Compatibility.isVisible(this.input.getElement())) {
+        if (!Utils.isVisible(this.input.getElement())) {
             return;
         }
 
@@ -274,7 +275,7 @@ SalsaCalendar.prototype = {
 
     _position_calendar_near: function(elem)
     {
-        var position = Compatibility.findPosition(elem);
+        var position = Utils.findPosition(elem);
 
         if (this.options.calendarPosition === "right") {
             this.calendar.style.top = parseInt(position.top) + "px";
@@ -314,7 +315,7 @@ SalsaCalendar.prototype = {
 
     hideOthers: function()
     {
-        var calendars = Compatibility.getElementsByClassName(document, "salsa-calendar");
+        var calendars = Utils.getElementsByClassName(document, "salsa-calendar");
 
         for (var i = 0; i < calendars.length; i++) {
             if (calendars[i] !== this.calendar) {

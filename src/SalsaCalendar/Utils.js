@@ -10,9 +10,9 @@
 
 'use strict';
 
-var Compatibility = {};
+var Utils = {};
 
-Compatibility.findPosition = function(elem)
+Utils.findPosition = function(elem)
 {
     var x = 0;
     var y = 0;
@@ -30,19 +30,19 @@ Compatibility.findPosition = function(elem)
     };
 };
 
-Compatibility.getEvent = function(event)
+Utils.getEvent = function(event)
 {
     return event || window.event;
 };
 
-Compatibility.getEventTarget = function(event)
+Utils.getEventTarget = function(event)
 {
-    event = Compatibility.getEvent(event);
+    event = Utils.getEvent(event);
 
     return event.target || window.event.srcElement;
 };
 
-Compatibility.getElementsByClassName = function(element, class_name)
+Utils.getElementsByClassName = function(element, class_name)
 {
     var elements = element.getElementsByTagName('*');
     var tmp = [];
@@ -62,7 +62,7 @@ Compatibility.getElementsByClassName = function(element, class_name)
     return tmp;
 };
 
-Compatibility.addEvent = function(element, event, callback)
+Utils.addEvent = function(element, event, callback)
 {
     if (element.addEventListener) {
         element.addEventListener(event, callback, false);
@@ -72,7 +72,7 @@ Compatibility.addEvent = function(element, event, callback)
     }
 };
 
-Compatibility.getRandomString = function(count)
+Utils.getRandomString = function(count)
 {
     if (count === undefined) {
         count = 6;
@@ -88,7 +88,7 @@ Compatibility.getRandomString = function(count)
     return text;
 };
 
-Compatibility.isVisible = function(elem)
+Utils.isVisible = function(elem)
 {
     var w = elem.offsetWidth;
     var h = elem.offsetHeight;
@@ -104,47 +104,11 @@ Compatibility.isVisible = function(elem)
     return elem.display !== "none";
 };
 
-Compatibility.isTouchDevice = function()
+Utils.isTouchDevice = function()
 {
     return ('ontouchstart' in window)
         || (navigator.MaxTouchPoints > 0)
         || (navigator.msMaxTouchPoints > 0);
 };
 
-if (!Function.prototype.bind) {
-    Function.prototype.bind = function(oThis) {
-        if (typeof this !== "function") {
-            // closest thing possible to the ECMAScript 5 internal IsCallable function
-            throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
-        }
-
-        var aArgs = Array.prototype.slice.call(arguments, 1),
-            fToBind = this,
-            fNOP = function() {},
-            fBound = function() {
-                return fToBind.apply(
-                    this instanceof fNOP && oThis ? this : oThis,
-                    aArgs.concat(Array.prototype.slice.call(arguments))
-                );
-            };
-
-        fNOP.prototype = this.prototype;
-        fBound.prototype = new fNOP();
-
-        return fBound;
-    };
-}
-
-if (!Array.prototype.indexOf) {
-    Array.prototype.indexOf = function(obj, start) {
-         for (var i = (start || 0), j = this.length; i < j; i++) {
-             if (this[i] === obj) {
-                 return i;
-             }
-         }
-
-         return -1;
-    };
-}
-
-module.exports = Compatibility;
+module.exports = Utils;

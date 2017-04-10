@@ -10,7 +10,7 @@
 
 'use strict';
 
-var Compatibility = require('./Compatibility.js');
+var Utils = require('./Utils.js');
 
 function NightsCalculator(options)
 {
@@ -32,9 +32,9 @@ function NightsCalculator(options)
 NightsCalculator.prototype = {
     updateNightsNo: function()
     {
-        var nights_counter = Compatibility.getElementsByClassName(this.nights_summary, "counter")[0];
-        var nights_singular = Compatibility.getElementsByClassName(this.nights_summary, "singular")[0];
-        var nights_plural = Compatibility.getElementsByClassName(this.nights_summary, "plural")[0];
+        var nights_counter = Utils.getElementsByClassName(this.nights_summary, "counter")[0];
+        var nights_singular = Utils.getElementsByClassName(this.nights_summary, "singular")[0];
+        var nights_plural = Utils.getElementsByClassName(this.nights_summary, "plural")[0];
 
         var nights_no = this._get_nights_no();
 

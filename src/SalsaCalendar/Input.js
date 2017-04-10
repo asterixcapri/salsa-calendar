@@ -10,7 +10,7 @@
 
 'use strict';
 
-var Compatibility = require('./Compatibility.js');
+var Utils = require('./Utils.js');
 
 function Input(calendar, inputId, allowEmptyDate, inputReadOnly)
 {
@@ -71,7 +71,7 @@ Input.prototype = {
         }.bind(this);
 
         this.input.onkeyup = function(event) {
-            event = Compatibility.getEvent(event);
+            event = Utils.getEvent(event);
 
             if (this._is_key_navigation(event.keyCode)) {
                 return;
