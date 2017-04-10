@@ -22,7 +22,7 @@ Utils.getElementsByClassName = function(elem, class_name)
         // Cache the current element to prevent memory leaks
         var e = elements[i];
 
-        if (e.className.match && (e.className.match(reg))) {
+        if (e.className.match && e.className.match(reg)) {
             // To improve performance when appending a new array item use the length
             // to increment the current index
             tmp[tmp.length] = e;
@@ -55,11 +55,11 @@ Utils.isElementVisible = function(elem)
     var w = elem.offsetWidth;
     var h = elem.offsetHeight;
 
-    if (w === 0 && h === 0) {
+    if ((w === 0) && (h === 0)) {
         return false;
     }
 
-    if (w > 0 && h > 0) {
+    if ((w > 0) && (h > 0)) {
         return true;
     }
 
@@ -86,22 +86,6 @@ Utils.addEvent = function(elem, event, callback)
     else if (elem.attachEvent) {
         elem.attachEvent("on" + event, callback);
     }
-};
-
-Utils.getRandomString = function(count)
-{
-    if (count === undefined) {
-        count = 6;
-    }
-
-    var text = "";
-    var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (var i = 0; i < count; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-
-    return text;
 };
 
 Utils.isTouchDevice = function()

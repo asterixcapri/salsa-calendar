@@ -258,7 +258,10 @@ SalsaCalendar.prototype = {
     _get_calendar_structure: function()
     {
         var calendar = document.createElement("div");
-        calendar.className = "salsa-calendar"+(this.options.showNextMonth ? " salsa-calendar-two-months" : "");
+
+        calendar.className = "salsa-calendar";
+        calendar.className += this.options.showNextMonth ? " salsa-calendar-two-months" : "";
+
         calendar.style.position = (this.options.fixed ? "fixed" : "absolute");
 
         return calendar;
@@ -292,7 +295,6 @@ SalsaCalendar.prototype = {
                 this.calendar.className += " sc-bottom";
             }
         }
-
     },
 
     hide: function()
