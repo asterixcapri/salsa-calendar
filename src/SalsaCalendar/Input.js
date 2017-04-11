@@ -46,8 +46,8 @@ Input.prototype = {
             this.calendar.setCurrentDate(this.calendar.getRangeValidDate(this.calendar.getMinValidDate()));
         }
 
-        if (this.inputReadOnly !== false) {
-            this.input.set("readonly", "readonly");
+        if (this.inputReadOnly) {
+            this.input.setAttribute("readonly", "readonly");
         }
     },
 
