@@ -95,15 +95,13 @@ Utils.addEvent = function(elem, event, callback)
     }
 };
 
-Utils.isTouchDevice = function()
+Utils.isMobile = function()
 {
-    if (/PhantomJS/.test(window.navigator.userAgent)) {
-        return false;
-    }
+    var current_device_width = (window.innerWidth > 0)
+        ? window.innerWidth
+        : screen.width;
 
-    return ('ontouchstart' in window)
-        || (navigator.MaxTouchPoints > 0)
-        || (navigator.msMaxTouchPoints > 0);
+    return current_device_width <= 480;
 };
 
 module.exports = Utils;

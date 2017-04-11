@@ -64,7 +64,7 @@ function SalsaCalendar(options)
         options.showNextMonth = false;
     }
 
-    if (Utils.isTouchDevice()) {
+    if (Utils.isMobile()) {
         options.showNextMonth = false;
     }
 
@@ -91,7 +91,7 @@ function SalsaCalendar(options)
     this.on_set_current_date_closures = [];
     this.on_date_click = function() {};
     this.i18n = new I18n(this, this.options.lang, options.dateFormats);
-    this.input = new Input(this, this.options.inputId, this.options.allowEmptyDate, this.options.inputReadOnly || Utils.isTouchDevice());
+    this.input = new Input(this, this.options.inputId, this.options.allowEmptyDate, this.options.inputReadOnly || Utils.isMobile());
 
     this._init_events();
     this._init_options();
