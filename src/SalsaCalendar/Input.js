@@ -181,7 +181,7 @@ Input.prototype = {
 
     setError: function()
     {
-        if (this.input.className.indexOf("salsa-calendar-error") !== -1) {
+        if (Utils.elementHasClass(this.input, "salsa-calendar-error")) {
             return;
         }
 

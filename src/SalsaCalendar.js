@@ -124,7 +124,7 @@ SalsaCalendar.prototype = {
             return true;
         }
 
-        if (el.className.search("sc-keep-open") !== -1) {
+        if (Utils.elementHasClass(el, "sc-keep-open")) {
             return true;
         }
 
@@ -217,7 +217,7 @@ SalsaCalendar.prototype = {
             return;
         }
 
-        if (document.body.className.search(" salsa-calendar-opened") === -1) {
+        if (!Utils.elementHasClass(document.body, "salsa-calendar-opened")) {
             document.body.className += " salsa-calendar-opened";
         }
 
@@ -275,7 +275,7 @@ SalsaCalendar.prototype = {
             this.calendar.style.top = parseInt(position.top) + "px";
             this.calendar.style.left = parseInt(position.left + elem.offsetWidth) + "px";
 
-            if (this.calendar.className.search(" sc-right") === -1) {
+            if (!Utils.elementHasClass(this.calendar, "sc-right")) {
                 this.calendar.className += " sc-right";
             }
         }
@@ -283,7 +283,7 @@ SalsaCalendar.prototype = {
             this.calendar.style.top = parseInt(position.top) + "px";
             this.calendar.style.left = parseInt(position.left - this.calendar.offsetWidth) + "px";
 
-            if (this.calendar.className.search(" sc-left") === -1) {
+            if (!Utils.elementHasClass(this.calendar, "sc-left")) {
                 this.calendar.className += " sc-left";
             }
         }
@@ -291,7 +291,7 @@ SalsaCalendar.prototype = {
             this.calendar.style.top = parseInt(position.top + elem.offsetHeight) + "px";
             this.calendar.style.left = parseInt(position.left) + "px";
 
-            if (this.calendar.className.search(" sc-bottom") === -1) {
+            if (!Utils.elementHasClass(this.calendar, "sc-bottom")) {
                 this.calendar.className += " sc-bottom";
             }
         }
