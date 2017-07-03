@@ -282,8 +282,10 @@ SalsaCalendar.prototype = {
         var position = Utils.findElementPosition(elem);
 
         for (var i = 0; i < this.options.scrollableContainers.length; i++) {
-            var el = this.options.scrollableContainers[i];
-            position.top -= el.scrollTop + el.clientTop;
+            var container = this.options.scrollableContainers[i];
+            position.top -= container.scrollTop + container.clientTop;
+
+            this._hide_calendar_on_input_overflow(container, elem, position);
         }
 
         if (this.options.calendarPosition === "right") {
@@ -309,6 +311,16 @@ SalsaCalendar.prototype = {
             if (!Utils.elementHasClass(this.calendar, "sc-bottom")) {
                 this.calendar.className += " sc-bottom";
             }
+        }
+    },
+
+    _hide_calendar_on_input_overflow: function(container, input, input_position)
+    {
+        var container_pos = Utils.findElementPosition(container);
+        var overflow_edge = input_position.top - container_pos.top - container.offsetTop + input.clientHeight;
+
+        if (overflow_edge > container.offsetHeight) {
+            this.hide();
         }
     },
 
