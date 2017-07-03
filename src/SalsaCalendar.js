@@ -84,6 +84,10 @@ function SalsaCalendar(options)
         options.dateFormats = {};
     }
 
+    if (options.scrollableContainers === undefined) {
+        options.scrollableContainers = [];
+    }
+
     this.options = options;
     this.calendar = null;
     this.other_calendar = null;
@@ -252,6 +256,12 @@ SalsaCalendar.prototype = {
 
         this.calendar.style.display = "";
 
+        for (var i = 0; i < this.options.scrollableContainers.length; i++) {
+            Utils.addEvent(this.options.scrollableContainers[i], "scroll", function(event) {
+                this._position_calendar_near(this.input.getElement());
+            }.bind(this));
+        }
+
         this._position_calendar_near(this.input.getElement());
     },
 
@@ -270,6 +280,11 @@ SalsaCalendar.prototype = {
     _position_calendar_near: function(elem)
     {
         var position = Utils.findElementPosition(elem);
+
+        for (var i = 0; i < this.options.scrollableContainers.length; i++) {
+            var el = this.options.scrollableContainers[i];
+            position.top -= el.scrollTop + el.clientTop;
+        }
 
         if (this.options.calendarPosition === "right") {
             this.calendar.style.top = parseInt(position.top) + "px";
