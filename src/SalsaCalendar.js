@@ -84,9 +84,7 @@ function SalsaCalendar(options)
         options.dateFormats = {};
     }
 
-    if (options.scrollableContainers === undefined) {
-        options.scrollableContainers = [];
-    }
+    this.scrollable_container = null;
 
     this.options = options;
     this.calendar = null;
@@ -256,13 +254,26 @@ SalsaCalendar.prototype = {
 
         this.calendar.style.display = "";
 
-        for (var i = 0; i < this.options.scrollableContainers.length; i++) {
-            Utils.addEvent(this.options.scrollableContainers[i], "scroll", function(event) {
+        this.scrollable_container = this._get_scrollable_container();
+
+        Utils.addEvent(this.scrollable_container, "scroll", function(event) {
+            if (this.isShown()) {
                 this._position_calendar_near(this.input.getElement());
-            }.bind(this));
-        }
+            }
+        }.bind(this));
 
         this._position_calendar_near(this.input.getElement());
+    },
+
+    _get_scrollable_container: function()
+    {
+        var parent = this.input.getElement().parentNode;
+
+        while ((parent !== document.body) && (parent.scrollHeight <= parent.offsetHeight)) {
+            parent = parent.parentNode;
+        }
+
+        return parent;
     },
 
     _get_calendar_structure: function()
@@ -281,11 +292,10 @@ SalsaCalendar.prototype = {
     {
         var position = Utils.findElementPosition(elem);
 
-        for (var i = 0; i < this.options.scrollableContainers.length; i++) {
-            var container = this.options.scrollableContainers[i];
-            position.top -= container.scrollTop + container.clientTop;
+        if (this.scrollable_container !== document.body) {
+            position.top -= this.scrollable_container.scrollTop;
 
-            this._hide_calendar_on_input_overflow(container, elem, position);
+            this._hide_calendar_on_input_overflow(this.scrollable_container, elem, position);
         }
 
         if (this.options.calendarPosition === "right") {
@@ -320,6 +330,10 @@ SalsaCalendar.prototype = {
         var overflow_edge = input_position.top - container_pos.top - container.offsetTop + input.clientHeight;
 
         if (overflow_edge > container.offsetHeight) {
+            this.hide();
+        }
+
+        if (input_position.top < container_pos.top) {
             this.hide();
         }
     },
