@@ -84,8 +84,8 @@ function SalsaCalendar(options)
         options.dateFormats = {};
     }
 
-    if (options.scrollable_container === undefined) {
-        options.scrollable_container = "";
+    if (options.scrollableContainer === undefined) {
+        options.scrollableContainer = "";
     }
 
     this.options = options;
@@ -97,8 +97,8 @@ function SalsaCalendar(options)
     this.i18n = new I18n(this, this.options.lang, options.dateFormats);
     this.input = new Input(this, this.options.inputId, this.options.allowEmptyDate, this.options.inputReadOnly || Utils.isMobile());
 
-    if (this.options.scrollable_container !== "") {
-        this.scrollable_container = document.getElementById(this.options.scrollable_container);
+    if (this.options.scrollableContainer !== "") {
+        this.scrollable_container = document.getElementById(this.options.scrollableContainer);
     }
     else {
         this.scrollable_container = document.body;
