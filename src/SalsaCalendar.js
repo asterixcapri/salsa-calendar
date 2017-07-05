@@ -84,7 +84,9 @@ function SalsaCalendar(options)
         options.dateFormats = {};
     }
 
-    this.scrollable_container = null;
+    if (options.scrollable_container === undefined) {
+        options.scrollable_container = "body";
+    }
 
     this.options = options;
     this.calendar = null;
@@ -94,6 +96,7 @@ function SalsaCalendar(options)
     this.on_date_click = function() {};
     this.i18n = new I18n(this, this.options.lang, options.dateFormats);
     this.input = new Input(this, this.options.inputId, this.options.allowEmptyDate, this.options.inputReadOnly || Utils.isMobile());
+    this.scrollable_container = document.getElement(this.options.scrollable_container);
 
     this._init_events();
     this._init_options();
@@ -254,8 +257,6 @@ SalsaCalendar.prototype = {
 
         this.calendar.style.display = "";
 
-        this.scrollable_container = this._get_scrollable_container();
-
         Utils.addEvent(this.scrollable_container, "scroll", function(event) {
             if (this.isShown()) {
                 this._position_calendar_near(this.input.getElement());
@@ -263,17 +264,6 @@ SalsaCalendar.prototype = {
         }.bind(this));
 
         this._position_calendar_near(this.input.getElement());
-    },
-
-    _get_scrollable_container: function()
-    {
-        var parent = this.input.getElement().parentNode;
-
-        while ((parent !== document.body) && (parent.scrollHeight <= parent.offsetHeight)) {
-            parent = parent.parentNode;
-        }
-
-        return parent;
     },
 
     _get_calendar_structure: function()
