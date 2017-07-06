@@ -762,6 +762,8 @@ SalsaCalendar.prototype = {
     }
 };
 
+SalsaCalendar.beforeShow = function() {};
+
 SalsaCalendar.Connector = require('./SalsaCalendar/Connector.js');
 SalsaCalendar.NightsCalculator = require('./SalsaCalendar/NightsCalculator.js');
 
