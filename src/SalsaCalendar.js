@@ -252,6 +252,8 @@ SalsaCalendar.prototype = {
             month = 0;
         }
 
+        this.beforeShow();
+
         if (this.calendar === null) {
             this.calendar = this._get_calendar_structure();
 
@@ -350,6 +352,20 @@ SalsaCalendar.prototype = {
         for (var i = 0; i < calendars.length; i++) {
             if (calendars[i] !== this.calendar) {
                 calendars[i].style.display = "none";
+            }
+        }
+    },
+
+    setFixed: function(fixed)
+    {
+        this.options.fixed = fixed;
+
+        if (this.calendar) {
+            if (fixed) {
+                this.calendar.style.position = "fixed";
+            }
+            else {
+                  this.calendar.style.position = "absolute";
             }
         }
     },
