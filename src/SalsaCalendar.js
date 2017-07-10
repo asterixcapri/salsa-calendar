@@ -223,6 +223,15 @@ SalsaCalendar.prototype = {
         this.options.range.max = date_string;
     },
 
+    setFixed: function(fixed)
+    {
+        this.options.fixed = fixed;
+
+        if (this.calendar) {
+            this.calendar.style.position = fixed ? "fixed" : "absolute";
+        }
+    },
+
     isShown: function()
     {
         return this.calendar && (this.calendar.style.display === "");
@@ -287,7 +296,7 @@ SalsaCalendar.prototype = {
         calendar.className = "salsa-calendar";
         calendar.className += this.options.showNextMonth ? " salsa-calendar-two-months" : "";
 
-        calendar.style.position = (this.options.fixed ? "fixed" : "absolute");
+        calendar.style.position = this.options.fixed ? "fixed" : "absolute";
 
         return calendar;
     },
@@ -358,20 +367,6 @@ SalsaCalendar.prototype = {
         for (var i = 0; i < calendars.length; i++) {
             if (calendars[i] !== this.calendar) {
                 calendars[i].style.display = "none";
-            }
-        }
-    },
-
-    setFixed: function(fixed)
-    {
-        this.options.fixed = fixed;
-
-        if (this.calendar) {
-            if (fixed) {
-                this.calendar.style.position = "fixed";
-            }
-            else {
-                  this.calendar.style.position = "absolute";
             }
         }
     },
