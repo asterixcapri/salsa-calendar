@@ -94,6 +94,7 @@ function SalsaCalendar(options)
     this.current_date = null;
     this.on_set_current_date_closures = [];
     this.on_date_click = function() {};
+    this.before_show = function() {};
     this.i18n = new I18n(this, this.options.lang, options.dateFormats);
     this.input = new Input(this, this.options.inputId, this.options.allowEmptyDate, this.options.inputReadOnly || Utils.isMobile());
 
@@ -162,6 +163,11 @@ SalsaCalendar.prototype = {
     onDateClick: function(closure)
     {
         this.on_date_click = closure;
+    },
+
+    beforeShow: function(closure)
+    {
+        this.before_show = closure;
     },
 
     setOtherCalendar: function(calendar)
@@ -252,7 +258,7 @@ SalsaCalendar.prototype = {
             month = 0;
         }
 
-        this.beforeShow();
+        this.before_show();
 
         if (this.calendar === null) {
             this.calendar = this._get_calendar_structure();
@@ -761,8 +767,6 @@ SalsaCalendar.prototype = {
         return thead;
     }
 };
-
-SalsaCalendar.beforeShow = function() {};
 
 SalsaCalendar.Connector = require('./SalsaCalendar/Connector.js');
 SalsaCalendar.NightsCalculator = require('./SalsaCalendar/NightsCalculator.js');
