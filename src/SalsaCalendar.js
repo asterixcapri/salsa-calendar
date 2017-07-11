@@ -95,6 +95,7 @@ function SalsaCalendar(options)
     this.on_set_current_date_closures = [];
     this.on_date_click = function() {};
     this.before_show = function() {};
+
     this.i18n = new I18n(this, this.options.lang, options.dateFormats);
     this.input = new Input(this, this.options.inputId, this.options.allowEmptyDate, this.options.inputReadOnly || Utils.isMobile());
 
@@ -227,9 +228,7 @@ SalsaCalendar.prototype = {
     {
         this.options.fixed = fixed;
 
-        if (this.calendar) {
-            this.calendar.style.position = fixed ? "fixed" : "absolute";
-        }
+        this._position_calendar_near(this.input.getElement());
     },
 
     isShown: function()
@@ -267,14 +266,14 @@ SalsaCalendar.prototype = {
             month = 0;
         }
 
-        this.before_show();
-
         if (this.calendar === null) {
             this.calendar = this._get_calendar_structure();
 
             var body = document.getElementsByTagName('body')[0];
             body.appendChild(this.calendar);
         }
+
+        this.before_show();
 
         this._refresh(year, month);
 
@@ -295,8 +294,6 @@ SalsaCalendar.prototype = {
 
         calendar.className = "salsa-calendar";
         calendar.className += this.options.showNextMonth ? " salsa-calendar-two-months" : "";
-
-        calendar.style.position = this.options.fixed ? "fixed" : "absolute";
 
         return calendar;
     },
@@ -335,6 +332,8 @@ SalsaCalendar.prototype = {
                 this.calendar.className += " sc-bottom";
             }
         }
+
+        this.calendar.style.position = this.options.fixed ? "fixed" : "absolute";
     },
 
     _hide_calendar_on_input_overflow: function(container, input, input_position)
