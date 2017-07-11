@@ -228,7 +228,9 @@ SalsaCalendar.prototype = {
     {
         this.options.fixed = fixed;
 
-        this._position_calendar_near(this.input.getElement());
+        if (this.calendar) {
+            this._position_calendar_near(this.input.getElement());
+        }
     },
 
     isShown: function()
