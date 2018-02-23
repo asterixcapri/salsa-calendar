@@ -522,39 +522,21 @@ SalsaCalendar.prototype = {
             var min_date = this.i18n.getTodayDate();
         }
 
-        for (var i = 0; i < this.options.ranges.length; i++) {
-            var range_min_date = this.i18n.dateString2Date(this.options.ranges[i].min);
-            var range_max_date = this.i18n.dateString2Date(this.options.ranges[i].max);
+        var ranges_max_date = this._get_ranges_max_date();
 
-            if (range_min_date === null) {
-                return min_date;
-            }
-
-            if (range_max_date === null) {
-                range_max_date = new Date(2050, 1, 1);
-            }
-
-            if ((min_date.getTime() >= range_min_date.getTime()) && (min_date.getTime() <= range_max_date.getTime())) {
-                return min_date;
-            }
+        if (ranges_max_date === null) {
+            ranges_max_date = new Date(2050, 1, 1);
         }
 
-        var min = false;
-
-        for (var i = 0; i < this.options.ranges.length; i++) {
-            var range_min_date = this.i18n.dateString2Date(this.options.ranges[i].min);
-
-            if (min === false) {
-                if ((range_min_date !== false) && range_min_date.getTime() >= min_date.getTime()) {
-                    min = range_min_date;
-                }
-            }
-            else if ((range_min_date.getTime() < min.getTime()) && range_min_date.getTime() >= min_date.getTime()) {
-                min = range_min_date;
-            }
+        while ((min_date.getTime() <= ranges_max_date.getTime()) && (!this.inRangeDate(min_date))) {
+            min_date = new Date(min_date.getTime()+24*60*60);
         }
 
-        return min;
+        if (this.inRangeDate(min_date)) {
+            return min_date;
+        }
+
+        return false;
     },
 
     _get_ranges_min_date: function()
