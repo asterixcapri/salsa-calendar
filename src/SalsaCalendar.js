@@ -281,6 +281,8 @@ SalsaCalendar.prototype = {
 
         this.calendar.style.display = "";
 
+        this.input.input.blur();
+
         Utils.addEvent(this.scrollable_container, "scroll", function(event) {
             if (this.isShown()) {
                 this._position_calendar_near(this.input.getElement());
