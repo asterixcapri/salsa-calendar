@@ -19,6 +19,10 @@ require('./css/salsa-calendar.less');
 
 function SalsaCalendar(options)
 {
+    if (options.name === undefined) {
+        options.name = "";
+    }
+
     if (options.lang === undefined) {
         options.lang = "en";
     }
@@ -297,6 +301,7 @@ SalsaCalendar.prototype = {
         var calendar = document.createElement("div");
 
         calendar.className = "salsa-calendar";
+        calendar.className += this.options.name !== "" ? " " + this.options.name : "";
         calendar.className += this.options.showNextMonth ? " salsa-calendar-two-months" : "";
 
         return calendar;
