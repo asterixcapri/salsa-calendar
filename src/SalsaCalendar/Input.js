@@ -53,7 +53,7 @@ Input.prototype = {
 
     _init_events: function()
     {
-        this.input.onfocus = this.input.onclick = function() {
+        this.input.onclick = function() {
             this.calendar.hideOthers();
 
             if (!this.calendar.isShown()) {
