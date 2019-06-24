@@ -126,7 +126,7 @@ SalsaCalendar.prototype = {
 
     _init_events: function()
     {
-        var evt = Utils.isMobile ? "touchstart" : "click";
+        var evt = Utils.isMobile() ? "touchstart" : "click";
 
         Utils.addEvent(document, evt, function(event) {
             var target = Utils.getEventTarget(event);
