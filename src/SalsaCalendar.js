@@ -537,8 +537,8 @@ SalsaCalendar.prototype = {
             ranges_max_date = new Date(2050, 1, 1);
         }
 
-        while ((min_date.getTime() <= ranges_max_date.getTime()) && (!this.inRangeDate(min_date))) {
-            min_date = new Date(min_date.getTime()+24*60*60);
+        if ((min_date.getTime() <= ranges_max_date.getTime()) && (!this.inRangeDate(min_date))) {
+            min_date = this._get_ranges_min_date();
         }
 
         if (this.inRangeDate(min_date)) {
