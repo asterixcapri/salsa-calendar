@@ -538,7 +538,7 @@ SalsaCalendar.prototype = {
         }
 
         if ((min_date.getTime() <= ranges_max_date.getTime()) && (!this.inRangeDate(min_date))) {
-            min_date = this._get_ranges_min_date();
+            min_date = this._get_min_ranges_valid_date(min_date);
         }
 
         if (this.inRangeDate(min_date)) {
@@ -546,6 +546,31 @@ SalsaCalendar.prototype = {
         }
 
         return false;
+    },
+
+    _get_min_ranges_valid_date: function(min_date)
+    {
+        var ranges_min_date = null;
+
+        for (var i = 0; i < this.options.ranges.length; i++) {
+            var range_max_date = this.i18n.dateString2Date(this.options.ranges[i].max);
+
+            if (range_max_date.getTime() < min_date.getTime()) {
+                continue;
+            }
+
+            var range_min_date = this.i18n.dateString2Date(this.options.ranges[i].min);
+
+            while ((range_min_date.getTime() < min_date.getTime()) && (range_min_date.getTime() <= range_max_date.getTime())) {
+                range_min_date = new Date(range_min_date.getTime()+24*60*60);
+            }
+
+            if ((ranges_min_date === null) || (range_min_date.getTime() < ranges_min_date)) {
+                ranges_min_date = range_min_date;
+            }
+        }
+
+        return ranges_min_date;
     },
 
     _get_ranges_min_date: function()
